@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "HelloworldController API 文档",
+  "description": "基于 JSON Schema 的 API 接口文档",
+  "version": "1.0.0",
+  "basePath": "/helloworld",
+  "endpoints": [
+    {
+      "methodName": "simpleChat",
+      "httpMethod": "GET",
+      "path": "/helloworld/simple/chat",
+      "description": "简单聊天接口 - 与 AI 助手进行对话",
+      "requestSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "title": "simpleChat 方法参数 Schema",
+        "description": "自动生成的 simpleChat 方法参数 JSON Schema",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "用户查询内容",
+            "minLength": 1,
+            "maxLength": 1000,
+            "example": "你好，请介绍一下你自己"
+          }
+        },
+        "required": ["query"]
+      },
+      "requestExample": {
+        "query": "你好，请介绍一下你自己"
+      },
+      "responseSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "title": "simpleChat 响应数据",
+        "properties": {
+          "data": {
+            "type": "string",
+            "description": "AI 聊天响应内容",
+            "example": "你好！我是一个智能聊天助手，很高兴为您服务！"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "请求是否成功",
+            "example": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "响应时间戳",
+            "example": "2024-01-01T12:00:00Z"
+          }
+        },
+        "required": ["success", "timestamp", "data"]
+      },
+      "responseExample": {
+        "data": "你好！我是一个智能聊天助手，很高兴为您服务！",
+        "success": true,
+        "timestamp": "2024-01-01T12:00:00Z"
+      },
+      "usage": {
+        "curl": "curl -X GET \"http://localhost:8080/helloworld/simple/chat?query=你好\"",
+        "javascript": "fetch('http://localhost:8080/helloworld/simple/chat?query=你好').then(response => response.text()).then(data => console.log(data))",
+        "java": "String response = restTemplate.getForObject(\"http://localhost:8080/helloworld/simple/chat?query=你好\", String.class);"
+      },
+      "notes": [
+        "如果 query 参数为空，将使用默认问题：'你好，请介绍一下你自己'",
+        "该接口集成了阿里云 DashScope AI 服务",
+        "支持上下文记忆功能",
+        "响应时间取决于 AI 服务的处理速度"
+      ]
+    }
+  ],
+  "controllerInfo": {
+    "className": "HelloworldController",
+    "package": "org.example.springaitooltest.controller",
+    "description": "智能聊天控制器，提供与 AI 助手的对话功能",
+    "dependencies": [
+      "Spring AI Alibaba DashScope",
+      "Spring Boot Web",
+      "Spring AI Chat Client"
+    ],
+    "configuration": {
+      "defaultPrompt": "你是一个博学的智能聊天助手，请根据用户提问回答！",
+      "topP": 0.7,
+      "chatMemory": "InMemoryChatMemory",
+      "advisors": ["MessageChatMemoryAdvisor", "SimpleLoggerAdvisor"]
+    }
+  },
+  "apiDocumentation": {
+    "generatedBy": "ApiDocumentGenerator",
+    "generatedAt": "2024-01-01T12:00:00Z",
+    "schemaVersion": "draft-07",
+    "format": "JSON Schema",
+    "purpose": "API 接口文档、参数验证、前端开发参考"
+  }
+}

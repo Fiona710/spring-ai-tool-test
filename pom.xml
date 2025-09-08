@@ -69,6 +69,13 @@
             <artifactId>reflections</artifactId>
             <version>0.10.2</version>
         </dependency>
+        
+        <!-- JSON Schema 验证库 -->
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>1.0.87</version>
+        </dependency>
     </dependencies>
 
     <repositories>
